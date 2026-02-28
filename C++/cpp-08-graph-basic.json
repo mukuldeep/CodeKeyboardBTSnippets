@@ -1,0 +1,187 @@
+{
+  "Graph Template (Adjacency List)": {
+    "prefix": "graph_template",
+    "body": [
+      "#include <bits/stdc++.h>",
+      "using namespace std;",
+      "",
+      "int main() {",
+      "    ios::sync_with_stdio(false);",
+      "    cin.tie(NULL);",
+      "",
+      "    int n, m;",
+      "    cin >> n >> m;",
+      "",
+      "    vector<vector<int>> adj(n + 1);",
+      "",
+      "    for(int i = 0; i < m; i++) {",
+      "        int u, v;",
+      "        cin >> u >> v;",
+      "        adj[u].push_back(v);",
+      "        adj[v].push_back(u); // remove if directed",
+      "    }",
+      "",
+      "    return 0;",
+      "}"
+    ],
+    "description": "Basic graph template using adjacency list"
+  },
+
+  "BFS Traversal": {
+    "prefix": "bfs",
+    "body": [
+      "void bfs(int start, vector<vector<int>>& adj, vector<int>& vis) {",
+      "    queue<int> q;",
+      "    q.push(start);",
+      "    vis[start] = 1;",
+      "",
+      "    while(!q.empty()) {",
+      "        int u = q.front();",
+      "        q.pop();",
+      "",
+      "        for(int v : adj[u]) {",
+      "            if(!vis[v]) {",
+      "                vis[v] = 1;",
+      "                q.push(v);",
+      "            }",
+      "        }",
+      "    }",
+      "}"
+    ],
+    "description": "Breadth First Search"
+  },
+
+  "DFS Traversal": {
+    "prefix": "dfs",
+    "body": [
+      "void dfs(int u, vector<vector<int>>& adj, vector<int>& vis) {",
+      "    vis[u] = 1;",
+      "",
+      "    for(int v : adj[u]) {",
+      "        if(!vis[v]) {",
+      "            dfs(v, adj, vis);",
+      "        }",
+      "    }",
+      "}"
+    ],
+    "description": "Depth First Search"
+  },
+
+  "Connected Components": {
+    "prefix": "connected_components",
+    "body": [
+      "int count_components(int n, vector<vector<int>>& adj) {",
+      "    vector<int> vis(n + 1, 0);",
+      "    int components = 0;",
+      "",
+      "    for(int i = 1; i <= n; i++) {",
+      "        if(!vis[i]) {",
+      "            components++;",
+      "            dfs(i, adj, vis);",
+      "        }",
+      "    }",
+      "    return components;",
+      "}"
+    ],
+    "description": "Count connected components in undirected graph"
+  },
+
+  "Bipartite Check (BFS)": {
+    "prefix": "bipartite",
+    "body": [
+      "bool is_bipartite(int n, vector<vector<int>>& adj) {",
+      "    vector<int> color(n + 1, -1);",
+      "",
+      "    for(int i = 1; i <= n; i++) {",
+      "        if(color[i] == -1) {",
+      "            queue<int> q;",
+      "            q.push(i);",
+      "            color[i] = 0;",
+      "",
+      "            while(!q.empty()) {",
+      "                int u = q.front();",
+      "                q.pop();",
+      "",
+      "                for(int v : adj[u]) {",
+      "                    if(color[v] == -1) {",
+      "                        color[v] = color[u] ^ 1;",
+      "                        q.push(v);",
+      "                    }",
+      "                    else if(color[v] == color[u]) {",
+      "                        return false;",
+      "                    }",
+      "                }",
+      "            }",
+      "        }",
+      "    }",
+      "    return true;",
+      "}"
+    ],
+    "description": "Check if graph is bipartite using BFS"
+  },
+
+  "Cycle Detection (Undirected Graph - DFS)": {
+    "prefix": "cycle_undirected",
+    "body": [
+      "bool dfs_cycle(int u, int parent, vector<vector<int>>& adj, vector<int>& vis) {",
+      "    vis[u] = 1;",
+      "",
+      "    for(int v : adj[u]) {",
+      "        if(!vis[v]) {",
+      "            if(dfs_cycle(v, u, adj, vis))",
+      "                return true;",
+      "        }",
+      "        else if(v != parent) {",
+      "            return true;",
+      "        }",
+      "    }",
+      "    return false;",
+      "}",
+      "",
+      "bool has_cycle(int n, vector<vector<int>>& adj) {",
+      "    vector<int> vis(n + 1, 0);",
+      "    for(int i = 1; i <= n; i++) {",
+      "        if(!vis[i]) {",
+      "            if(dfs_cycle(i, -1, adj, vis))",
+      "                return true;",
+      "        }",
+      "    }",
+      "    return false;",
+      "}"
+    ],
+    "description": "Detect cycle in undirected graph using DFS"
+  },
+
+  "Cycle Detection (Directed Graph - DFS)": {
+    "prefix": "cycle_directed",
+    "body": [
+      "bool dfs_cycle_dir(int u, vector<vector<int>>& adj, vector<int>& vis, vector<int>& rec) {",
+      "    vis[u] = 1;",
+      "    rec[u] = 1;",
+      "",
+      "    for(int v : adj[u]) {",
+      "        if(!vis[v] && dfs_cycle_dir(v, adj, vis, rec))",
+      "            return true;",
+      "        else if(rec[v])",
+      "            return true;",
+      "    }",
+      "",
+      "    rec[u] = 0;",
+      "    return false;",
+      "}",
+      "",
+      "bool has_cycle_directed(int n, vector<vector<int>>& adj) {",
+      "    vector<int> vis(n + 1, 0), rec(n + 1, 0);",
+      "",
+      "    for(int i = 1; i <= n; i++) {",
+      "        if(!vis[i]) {",
+      "            if(dfs_cycle_dir(i, adj, vis, rec))",
+      "                return true;",
+      "        }",
+      "    }",
+      "    return false;",
+      "}"
+    ],
+    "description": "Detect cycle in directed graph using DFS + recursion stack"
+  }
+}
