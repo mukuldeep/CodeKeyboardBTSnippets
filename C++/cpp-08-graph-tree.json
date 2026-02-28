@@ -1,0 +1,128 @@
+{
+  "LCA (Binary Lifting)": {
+    "prefix": "lca_binary",
+    "body": [
+      "const int LOG = 20;",
+      "vector<vector<int>> adj;",
+      "vector<int> depth;",
+      "vector<vector<int>> up;",
+      "",
+      "void dfs_lca(int u, int p) {",
+      "    up[u][0] = p;",
+      "    for(int i = 1; i < LOG; i++) {",
+      "        up[u][i] = up[up[u][i-1]][i-1];",
+      "    }",
+      "",
+      "    for(int v : adj[u]) {",
+      "        if(v == p) continue;",
+      "        depth[v] = depth[u] + 1;",
+      "        dfs_lca(v, u);",
+      "    }",
+      "}",
+      "",
+      "int lca(int a, int b) {",
+      "    if(depth[a] < depth[b]) swap(a, b);",
+      "",
+      "    int diff = depth[a] - depth[b];",
+      "    for(int i = LOG - 1; i >= 0; i--) {",
+      "        if(diff & (1 << i))",
+      "            a = up[a][i];",
+      "    }",
+      "",
+      "    if(a == b) return a;",
+      "",
+      "    for(int i = LOG - 1; i >= 0; i--) {",
+      "        if(up[a][i] != up[b][i]) {",
+      "            a = up[a][i];",
+      "            b = up[b][i];",
+      "        }",
+      "    }",
+      "",
+      "    return up[a][0];",
+      "}"
+    ],
+    "description": "Lowest Common Ancestor using Binary Lifting"
+  },
+
+  "Tree Diameter (2 DFS)": {
+    "prefix": "tree_diameter",
+    "body": [
+      "pair<int,int> dfs_diameter(int u, int p, int d) {",
+      "    pair<int,int> res = {d, u};",
+      "",
+      "    for(int v : adj[u]) {",
+      "        if(v == p) continue;",
+      "        res = max(res, dfs_diameter(v, u, d + 1));",
+      "    }",
+      "",
+      "    return res;",
+      "}",
+      "",
+      "int tree_diameter(int n) {",
+      "    auto far1 = dfs_diameter(1, -1, 0);",
+      "    auto far2 = dfs_diameter(far1.second, -1, 0);",
+      "    return far2.first;",
+      "}"
+    ],
+    "description": "Tree diameter using two DFS"
+  },
+
+  "Subtree Size (DFS)": {
+    "prefix": "subtree_size",
+    "body": [
+      "vector<int> subtree;",
+      "",
+      "void dfs_subtree(int u, int p) {",
+      "    subtree[u] = 1;",
+      "    for(int v : adj[u]) {",
+      "        if(v == p) continue;",
+      "        dfs_subtree(v, u);",
+      "        subtree[u] += subtree[v];",
+      "    }",
+      "}"
+    ],
+    "description": "Compute subtree sizes"
+  },
+
+  "Euler Tour (In-Time / Out-Time)": {
+    "prefix": "euler_tour",
+    "body": [
+      "vector<int> tin, tout;",
+      "int timer = 0;",
+      "",
+      "void dfs_euler(int u, int p) {",
+      "    tin[u] = ++timer;",
+      "",
+      "    for(int v : adj[u]) {",
+      "        if(v == p) continue;",
+      "        dfs_euler(v, u);",
+      "    }",
+      "",
+      "    tout[u] = timer;",
+      "}",
+      "",
+      "// u is ancestor of v if:",
+      "// tin[u] <= tin[v] && tout[v] <= tout[u]"
+    ],
+    "description": "Euler tour for subtree queries / ancestor check"
+  },
+
+  "Tree Centroid": {
+    "prefix": "tree_centroid",
+    "body": [
+      "int find_centroid(int u, int p, int n) {",
+      "    for(int v : adj[u]) {",
+      "        if(v == p) continue;",
+      "        if(subtree[v] > n / 2)",
+      "            return find_centroid(v, u, n);",
+      "    }",
+      "    return u;",
+      "}",
+      "",
+      "// Usage:",
+      "// dfs_subtree(root, -1);",
+      "// int centroid = find_centroid(root, -1, n);"
+    ],
+    "description": "Find centroid of tree"
+  }
+}
