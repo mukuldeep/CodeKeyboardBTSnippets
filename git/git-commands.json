@@ -1,0 +1,209 @@
+{
+  "Git Init": {
+    "prefix": "git-init",
+    "body": [
+      "git init"
+    ],
+    "description": "Initialize a new Git repository"
+  },
+
+  "Git Clone": {
+    "prefix": "git-clone",
+    "body": [
+      "git clone ${1:repo_url}"
+    ],
+    "description": "Clone a remote repository"
+  },
+
+  "Git Status": {
+    "prefix": "git-status",
+    "body": [
+      "git status"
+    ],
+    "description": "Show working tree status"
+  },
+
+  "Git Add File": {
+    "prefix": "git-add",
+    "body": [
+      "git add ${1:file}"
+    ],
+    "description": "Stage a specific file"
+  },
+
+  "Git Add All": {
+    "prefix": "git-add-all",
+    "body": [
+      "git add ."
+    ],
+    "description": "Stage all changes"
+  },
+
+  "Git Commit": {
+    "prefix": "git-commit",
+    "body": [
+      "git commit -m \"${1:commit message}\""
+    ],
+    "description": "Commit staged changes with message"
+  },
+
+  "Git Commit Amend": {
+    "prefix": "git-amend",
+    "body": [
+      "git commit --amend -m \"${1:new message}\""
+    ],
+    "description": "Amend last commit message"
+  },
+
+  "Git Push": {
+    "prefix": "git-push",
+    "body": [
+      "git push ${1:origin} ${2:branch}"
+    ],
+    "description": "Push to remote branch"
+  },
+
+  "Git Pull": {
+    "prefix": "git-pull",
+    "body": [
+      "git pull ${1:origin} ${2:branch}"
+    ],
+    "description": "Pull from remote branch"
+  },
+
+  "Git Fetch": {
+    "prefix": "git-fetch",
+    "body": [
+      "git fetch --all"
+    ],
+    "description": "Fetch all remotes"
+  },
+
+  "Git Branch List": {
+    "prefix": "git-branch",
+    "body": [
+      "git branch"
+    ],
+    "description": "List local branches"
+  },
+
+  "Git Create Branch": {
+    "prefix": "git-branch-new",
+    "body": [
+      "git checkout -b ${1:branch_name}"
+    ],
+    "description": "Create and switch to new branch"
+  },
+
+  "Git Checkout Branch": {
+    "prefix": "git-checkout",
+    "body": [
+      "git checkout ${1:branch_name}"
+    ],
+    "description": "Switch branch"
+  },
+
+  "Git Merge": {
+    "prefix": "git-merge",
+    "body": [
+      "git merge ${1:branch_name}"
+    ],
+    "description": "Merge branch into current branch"
+  },
+
+  "Git Rebase": {
+    "prefix": "git-rebase",
+    "body": [
+      "git rebase ${1:branch_name}"
+    ],
+    "description": "Rebase current branch"
+  },
+
+  "Git Log": {
+    "prefix": "git-log",
+    "body": [
+      "git log --oneline --graph --decorate --all"
+    ],
+    "description": "Pretty git log graph"
+  },
+
+  "Git Diff": {
+    "prefix": "git-diff",
+    "body": [
+      "git diff"
+    ],
+    "description": "Show unstaged differences"
+  },
+
+  "Git Reset Soft": {
+    "prefix": "git-reset-soft",
+    "body": [
+      "git reset --soft ${1:HEAD~1}"
+    ],
+    "description": "Soft reset (keep changes staged)"
+  },
+
+  "Git Reset Hard": {
+    "prefix": "git-reset-hard",
+    "body": [
+      "git reset --hard ${1:HEAD~1}"
+    ],
+    "description": "Hard reset (discard changes)"
+  },
+
+  "Git Stash": {
+    "prefix": "git-stash",
+    "body": [
+      "git stash push -m \"${1:stash message}\""
+    ],
+    "description": "Stash changes with message"
+  },
+
+  "Git Stash Pop": {
+    "prefix": "git-stash-pop",
+    "body": [
+      "git stash pop"
+    ],
+    "description": "Apply and remove latest stash"
+  },
+
+  "Git Remote Add": {
+    "prefix": "git-remote-add",
+    "body": [
+      "git remote add ${1:origin} ${2:repo_url}"
+    ],
+    "description": "Add remote repository"
+  },
+
+  "Git Remote List": {
+    "prefix": "git-remote",
+    "body": [
+      "git remote -v"
+    ],
+    "description": "List remotes"
+  },
+
+  "Git Tag Create": {
+    "prefix": "git-tag",
+    "body": [
+      "git tag -a ${1:v1.0.0} -m \"${2:tag message}\""
+    ],
+    "description": "Create annotated tag"
+  },
+
+  "Git Cherry Pick": {
+    "prefix": "git-cherry-pick",
+    "body": [
+      "git cherry-pick ${1:commit_hash}"
+    ],
+    "description": "Cherry-pick a commit"
+  },
+
+  "Git Clean": {
+    "prefix": "git-clean",
+    "body": [
+      "git clean -fd"
+    ],
+    "description": "Remove untracked files and directories"
+  }
+}
