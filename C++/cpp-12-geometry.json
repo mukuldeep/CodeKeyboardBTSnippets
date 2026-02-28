@@ -1,0 +1,136 @@
+{
+  "Point Struct": {
+    "prefix": "geom_point",
+    "body": [
+      "struct Point {",
+      "    double x, y;",
+      "    Point() {}",
+      "    Point(double _x, double _y) : x(_x), y(_y) {}",
+      "",
+      "    Point operator + (const Point &p) const {",
+      "        return Point(x + p.x, y + p.y);",
+      "    }",
+      "",
+      "    Point operator - (const Point &p) const {",
+      "        return Point(x - p.x, y - p.y);",
+      "    }",
+      "",
+      "    Point operator * (double k) const {",
+      "        return Point(x * k, y * k);",
+      "    }",
+      "",
+      "    bool operator < (const Point &p) const {",
+      "        return x < p.x || (x == p.x && y < p.y);",
+      "    }",
+      "};"
+    ],
+    "description": "2D Point structure with basic operators"
+  },
+
+  "Cross Product": {
+    "prefix": "geom_cross",
+    "body": [
+      "double cross(const Point &a, const Point &b) {",
+      "    return a.x * b.y - a.y * b.x;",
+      "}",
+      "",
+      "double cross(const Point &a, const Point &b, const Point &c) {",
+      "    // cross of (b - a) x (c - a)",
+      "    return cross(b - a, c - a);",
+      "}"
+    ],
+    "description": "Cross product (2D)"
+  },
+
+  "Dot Product": {
+    "prefix": "geom_dot",
+    "body": [
+      "double dot(const Point &a, const Point &b) {",
+      "    return a.x * b.x + a.y * b.y;",
+      "}",
+      "",
+      "double dot(const Point &a, const Point &b, const Point &c) {",
+      "    // dot of (b - a) · (c - a)",
+      "    return dot(b - a, c - a);",
+      "}"
+    ],
+    "description": "Dot product (2D)"
+  },
+
+  "Orientation": {
+    "prefix": "geom_orientation",
+    "body": [
+      "int orientation(const Point &a, const Point &b, const Point &c) {",
+      "    double val = cross(a, b, c);",
+      "    if (fabs(val) < 1e-9) return 0; // collinear",
+      "    return (val > 0) ? 1 : -1;      // 1: CCW, -1: CW",
+      "}"
+    ],
+    "description": "Orientation test (CCW, CW, Collinear)"
+  },
+
+  "Convex Hull (Monotone Chain)": {
+    "prefix": "geom_convex_hull",
+    "body": [
+      "vector<Point> convexHull(vector<Point> &pts) {",
+      "    int n = pts.size();",
+      "    if (n <= 1) return pts;",
+      "",
+      "    sort(pts.begin(), pts.end());",
+      "    vector<Point> hull(2 * n);",
+      "    int k = 0;",
+      "",
+      "    // Lower hull",
+      "    for (int i = 0; i < n; i++) {",
+      "        while (k >= 2 && cross(hull[k-2], hull[k-1], pts[i]) <= 0) k--;",
+      "        hull[k++] = pts[i];",
+      "    }",
+      "",
+      "    // Upper hull",
+      "    for (int i = n - 2, t = k + 1; i >= 0; i--) {",
+      "        while (k >= t && cross(hull[k-2], hull[k-1], pts[i]) <= 0) k--;",
+      "        hull[k++] = pts[i];",
+      "    }",
+      "",
+      "    hull.resize(k - 1);",
+      "    return hull;",
+      "}"
+    ],
+    "description": "Convex Hull using Monotone Chain (O(n log n))"
+  },
+
+  "Line Intersection": {
+    "prefix": "geom_line_intersection",
+    "body": [
+      "bool lineIntersection(Point a, Point b, Point c, Point d, Point &out) {",
+      "    // Line AB and CD",
+      "    Point r = b - a;",
+      "    Point s = d - c;",
+      "    double denom = cross(r, s);",
+      "",
+      "    if (fabs(denom) < 1e-9) return false; // Parallel",
+      "",
+      "    double t = cross(c - a, s) / denom;",
+      "    out = a + r * t;",
+      "    return true;",
+      "}"
+    ],
+    "description": "Line intersection (infinite lines)"
+  },
+
+  "Polygon Area": {
+    "prefix": "geom_polygon_area",
+    "body": [
+      "double polygonArea(const vector<Point> &poly) {",
+      "    int n = poly.size();",
+      "    double area = 0;",
+      "    for (int i = 0; i < n; i++) {",
+      "        int j = (i + 1) % n;",
+      "        area += cross(poly[i], poly[j]);",
+      "    }",
+      "    return fabs(area) / 2.0;",
+      "}"
+    ],
+    "description": "Polygon area using Shoelace formula"
+  }
+}
