@@ -1,0 +1,151 @@
+{
+  "1D Prefix Sum Build": {
+    "prefix": "ps_1d_build",
+    "body": [
+      "// Build 1D prefix sum",
+      "vector<long long> pref(n + 1, 0);",
+      "for (int i = 0; i < n; i++) {",
+      "    pref[i + 1] = pref[i] + a[i];",
+      "}"
+    ]
+  },
+
+  "1D Range Sum Query [l, r]": {
+    "prefix": "ps_1d_query",
+    "body": [
+      "// Query sum in range [l, r] (0-based)",
+      "long long rangeSum(int l, int r) {",
+      "    return pref[r + 1] - pref[l];",
+      "}"
+    ]
+  },
+
+  "1D Prefix In-place": {
+    "prefix": "ps_1d_inplace",
+    "body": [
+      "// In-place prefix sum",
+      "for (int i = 1; i < n; i++) {",
+      "    a[i] += a[i - 1];",
+      "}"
+    ]
+  },
+
+  "2D Prefix Sum Build": {
+    "prefix": "ps_2d_build",
+    "body": [
+      "// Build 2D prefix sum",
+      "vector<vector<long long>> pref(n + 1, vector<long long>(m + 1, 0));",
+      "",
+      "for (int i = 1; i <= n; i++) {",
+      "    for (int j = 1; j <= m; j++) {",
+      "        pref[i][j] = grid[i - 1][j - 1]",
+      "                    + pref[i - 1][j]",
+      "                    + pref[i][j - 1]",
+      "                    - pref[i - 1][j - 1];",
+      "    }",
+      "}"
+    ]
+  },
+
+  "2D Range Sum Query": {
+    "prefix": "ps_2d_query",
+    "body": [
+      "// Query submatrix [(x1,y1), (x2,y2)] inclusive (0-based)",
+      "long long query(int x1, int y1, int x2, int y2) {",
+      "    x1++; y1++; x2++; y2++;",
+      "    return pref[x2][y2]",
+      "         - pref[x1 - 1][y2]",
+      "         - pref[x2][y1 - 1]",
+      "         + pref[x1 - 1][y1 - 1];",
+      "}"
+    ]
+  },
+
+  "1D Difference Array Build": {
+    "prefix": "diff_1d_build",
+    "body": [
+      "// Build difference array",
+      "vector<long long> diff(n + 1, 0);"
+    ]
+  },
+
+  "1D Range Update (l, r, val)": {
+    "prefix": "diff_1d_update",
+    "body": [
+      "// Add val to range [l, r]",
+      "diff[l] += val;",
+      "if (r + 1 < n) diff[r + 1] -= val;"
+    ]
+  },
+
+  "Restore Array from Difference": {
+    "prefix": "diff_1d_restore",
+    "body": [
+      "// Restore original array after all updates",
+      "vector<long long> a(n);",
+      "a[0] = diff[0];",
+      "for (int i = 1; i < n; i++) {",
+      "    a[i] = a[i - 1] + diff[i];",
+      "}"
+    ]
+  },
+
+  "Difference Array Full Template": {
+    "prefix": "diff_1d_full",
+    "body": [
+      "// 1D Difference Array Full Template",
+      "vector<long long> diff(n + 1, 0);",
+      "",
+      "// For each update [l, r] add val",
+      "diff[l] += val;",
+      "if (r + 1 < n) diff[r + 1] -= val;",
+      "",
+      "// Restore final array",
+      "vector<long long> a(n);",
+      "a[0] = diff[0];",
+      "for (int i = 1; i < n; i++) {",
+      "    a[i] = a[i - 1] + diff[i];",
+      "}"
+    ]
+  },
+
+  "2D Difference Array (Imos Method)": {
+    "prefix": "diff_2d_imos",
+    "body": [
+      "// 2D Difference Array (Imos)",
+      "vector<vector<long long>> diff(n + 2, vector<long long>(m + 2, 0));",
+      "",
+      "// Add val to rectangle [(x1,y1), (x2,y2)] inclusive",
+      "diff[x1][y1] += val;",
+      "diff[x2 + 1][y1] -= val;",
+      "diff[x1][y2 + 1] -= val;",
+      "diff[x2 + 1][y2 + 1] += val;",
+      "",
+      "// Restore via prefix sums",
+      "for (int i = 0; i < n; i++) {",
+      "    for (int j = 0; j < m; j++) {",
+      "        if (i > 0) diff[i][j] += diff[i - 1][j];",
+      "        if (j > 0) diff[i][j] += diff[i][j - 1];",
+      "        if (i > 0 && j > 0) diff[i][j] -= diff[i - 1][j - 1];",
+      "    }",
+      "}"
+    ]
+  },
+
+  "Imos Method (Event Sweep Style)": {
+    "prefix": "imos_event",
+    "body": [
+      "// Imos method for line sweep (interval addition)",
+      "vector<long long> imos(n + 2, 0);",
+      "",
+      "// For interval [l, r]",
+      "imos[l] += 1;",
+      "imos[r + 1] -= 1;",
+      "",
+      "// Build prefix to get coverage",
+      "for (int i = 1; i <= n; i++) {",
+      "    imos[i] += imos[i - 1];",
+      "}"
+    ]
+  }
+}
