@@ -1,0 +1,231 @@
+{
+  "Main Template": {
+    "prefix": "mainpy",
+    "body": [
+      "import sys",
+      "import threading",
+      "",
+      "def solve():",
+      "    input = sys.stdin.readline",
+      "    $0",
+      "",
+      "if __name__ == \"__main__\":",
+      "    solve()"
+    ],
+    "description": "Python main template with fast IO"
+  },
+
+  "Fast IO Setup": {
+    "prefix": "fastio",
+    "body": [
+      "import sys",
+      "input = sys.stdin.readline"
+    ],
+    "description": "Fast input setup"
+  },
+
+  "Read Int": {
+    "prefix": "readint",
+    "body": [
+      "n = int(input().strip())"
+    ],
+    "description": "Read single integer"
+  },
+
+  "Read Int List": {
+    "prefix": "readlist",
+    "body": [
+      "arr = list(map(int, input().split()))"
+    ],
+    "description": "Read list of integers"
+  },
+
+  "Read Matrix": {
+    "prefix": "readmatrix",
+    "body": [
+      "n, m = map(int, input().split())",
+      "mat = [list(map(int, input().split())) for _ in range(n)]"
+    ],
+    "description": "Read 2D matrix"
+  },
+
+  "GCD": {
+    "prefix": "gcd",
+    "body": [
+      "from math import gcd"
+    ],
+    "description": "Import gcd"
+  },
+
+  "LCM Function": {
+    "prefix": "lcm",
+    "body": [
+      "def lcm(a, b):",
+      "    return a // gcd(a, b) * b"
+    ],
+    "description": "Compute LCM"
+  },
+
+  "Binary Exponentiation": {
+    "prefix": "binexp",
+    "body": [
+      "def binpow(a, b):",
+      "    res = 1",
+      "    while b:",
+      "        if b & 1:",
+      "            res *= a",
+      "        a *= a",
+      "        b >>= 1",
+      "    return res"
+    ],
+    "description": "Binary exponentiation"
+  },
+
+  "Modular Exponentiation": {
+    "prefix": "modexp",
+    "body": [
+      "def modpow(a, b, mod):",
+      "    res = 1",
+      "    a %= mod",
+      "    while b:",
+      "        if b & 1:",
+      "            res = (res * a) % mod",
+      "        a = (a * a) % mod",
+      "        b >>= 1",
+      "    return res"
+    ],
+    "description": "Modular exponentiation"
+  },
+
+  "DefaultDict": {
+    "prefix": "defaultdict",
+    "body": [
+      "from collections import defaultdict",
+      "d = defaultdict(${1:int})"
+    ],
+    "description": "DefaultDict template"
+  },
+
+  "Counter": {
+    "prefix": "counter",
+    "body": [
+      "from collections import Counter",
+      "cnt = Counter(${1:arr})"
+    ],
+    "description": "Counter usage"
+  },
+
+  "Deque": {
+    "prefix": "deque",
+    "body": [
+      "from collections import deque",
+      "dq = deque()"
+    ],
+    "description": "Deque template"
+  },
+
+  "Heap Min": {
+    "prefix": "heapmin",
+    "body": [
+      "import heapq",
+      "heap = []",
+      "heapq.heappush(heap, ${1:value})",
+      "x = heapq.heappop(heap)"
+    ],
+    "description": "Min heap usage"
+  },
+
+  "Heap Max": {
+    "prefix": "heapmax",
+    "body": [
+      "import heapq",
+      "heap = []",
+      "heapq.heappush(heap, -${1:value})",
+      "x = -heapq.heappop(heap)"
+    ],
+    "description": "Max heap using negative values"
+  },
+
+  "Sort List": {
+    "prefix": "sortlist",
+    "body": [
+      "${1:arr}.sort()"
+    ],
+    "description": "Sort list ascending"
+  },
+
+  "Sort With Key": {
+    "prefix": "sortkey",
+    "body": [
+      "${1:arr}.sort(key=lambda x: ${2:x})"
+    ],
+    "description": "Sort with key"
+  },
+
+  "Unique List": {
+    "prefix": "uniqlist",
+    "body": [
+      "${1:arr} = list(set(${1:arr}))"
+    ],
+    "description": "Remove duplicates"
+  },
+
+  "Binary Search": {
+    "prefix": "bisect",
+    "body": [
+      "import bisect",
+      "pos = bisect.bisect_left(${1:arr}, ${2:value})"
+    ],
+    "description": "Binary search position"
+  },
+
+  "All Permutations": {
+    "prefix": "perm",
+    "body": [
+      "from itertools import permutations",
+      "perms = list(permutations(${1:arr}))"
+    ],
+    "description": "Generate permutations"
+  },
+
+  "All Combinations": {
+    "prefix": "comb",
+    "body": [
+      "from itertools import combinations",
+      "combs = list(combinations(${1:arr}, ${2:r}))"
+    ],
+    "description": "Generate combinations"
+  },
+
+  "For Loop": {
+    "prefix": "fori",
+    "body": [
+      "for i in range(${1:n}):",
+      "    $0"
+    ],
+    "description": "Standard for loop"
+  },
+
+  "Enumerate Loop": {
+    "prefix": "enum",
+    "body": [
+      "for i, x in enumerate(${1:arr}):",
+      "    $0"
+    ],
+    "description": "Enumerate loop"
+  },
+
+  "Thread Template": {
+    "prefix": "thread",
+    "body": [
+      "import threading",
+      "def worker():",
+      "    $0",
+      "",
+      "t = threading.Thread(target=worker)",
+      "t.start()",
+      "t.join()"
+    ],
+    "description": "Basic threading template"
+  }
+}
