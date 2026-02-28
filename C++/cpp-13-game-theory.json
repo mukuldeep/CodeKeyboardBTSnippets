@@ -1,0 +1,102 @@
+{
+  "Nim Game (Basic)": {
+    "prefix": "gt_nim",
+    "body": [
+      "// Nim Game: XOR of all piles",
+      "bool nimWinningPosition(const vector<long long> &piles) {",
+      "    long long xr = 0;",
+      "    for (auto p : piles) xr ^= p;",
+      "    return xr != 0; // true = first player wins",
+      "}"
+    ],
+    "description": "Check if Nim position is winning (xor != 0)"
+  },
+
+  "Nim Move (Find Winning Move)": {
+    "prefix": "gt_nim_move",
+    "body": [
+      "// Find a winning move in Nim",
+      "pair<int,long long> nimWinningMove(vector<long long> &piles) {",
+      "    long long xr = 0;",
+      "    for (auto p : piles) xr ^= p;",
+      "",
+      "    if (xr == 0) return {-1, -1}; // losing position",
+      "",
+      "    for (int i = 0; i < (int)piles.size(); i++) {",
+      "        long long target = piles[i] ^ xr;",
+      "        if (target < piles[i]) {",
+      "            return {i, target}; // reduce pile i to target",
+      "        }",
+      "    }",
+      "    return {-1, -1};",
+      "}"
+    ],
+    "description": "Find winning move in Nim"
+  },
+
+  "Grundy Number (Generic DAG)": {
+    "prefix": "gt_grundy_dag",
+    "body": [
+      "// Compute Grundy numbers on DAG",
+      "vector<int> grundy;",
+      "vector<vector<int>> adj;",
+      "",
+      "int mex(set<int> &s) {",
+      "    int g = 0;",
+      "    while (s.count(g)) g++;",
+      "    return g;",
+      "}",
+      "",
+      "int computeGrundy(int u) {",
+      "    if (grundy[u] != -1) return grundy[u];",
+      "",
+      "    set<int> s;",
+      "    for (int v : adj[u]) {",
+      "        s.insert(computeGrundy(v));",
+      "    }",
+      "",
+      "    return grundy[u] = mex(s);",
+      "}"
+    ],
+    "description": "Grundy number computation on DAG"
+  },
+
+  "Sprague-Grundy Theorem (Multiple Games)": {
+    "prefix": "gt_sprague_grundy",
+    "body": [
+      "// Sprague-Grundy: XOR of independent game Grundy numbers",
+      "bool spragueGrundyWinning(const vector<int> &grundyValues) {",
+      "    int xr = 0;",
+      "    for (int g : grundyValues) xr ^= g;",
+      "    return xr != 0; // true = first player wins",
+      "}"
+    ],
+    "description": "Sprague-Grundy theorem for disjoint games"
+  },
+
+  "Grundy Precomputation (Moves Array)": {
+    "prefix": "gt_grundy_moves",
+    "body": [
+      "// Grundy precomputation for subtraction game",
+      "vector<int> computeGrundy(int maxN, const vector<int> &moves) {",
+      "    vector<int> g(maxN + 1, 0);",
+      "",
+      "    for (int i = 1; i <= maxN; i++) {",
+      "        set<int> s;",
+      "        for (int mv : moves) {",
+      "            if (i - mv >= 0) {",
+      "                s.insert(g[i - mv]);",
+      "            }",
+      "        }",
+      "",
+      "        int mex = 0;",
+      "        while (s.count(mex)) mex++;",
+      "        g[i] = mex;",
+      "    }",
+      "",
+      "    return g;",
+      "}"
+    ],
+    "description": "Grundy numbers for subtraction game"
+  }
+}
