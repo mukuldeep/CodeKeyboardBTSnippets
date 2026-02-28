@@ -1,0 +1,197 @@
+{
+  "Interval Scheduling (Max Non-Overlapping)": {
+    "prefix": "gr_interval",
+    "body": [
+      "// Max non-overlapping intervals",
+      "struct Interval {",
+      "    int l, r;",
+      "};",
+      "",
+      "int maxNonOverlap(vector<Interval>& a) {",
+      "    sort(a.begin(), a.end(), [](auto &x, auto &y) {",
+      "        return x.r < y.r;",
+      "    });",
+      "",
+      "    int count = 0;",
+      "    int last_end = INT_MIN;",
+      "",
+      "    for (auto &it : a) {",
+      "        if (it.l >= last_end) {",
+      "            count++;",
+      "            last_end = it.r;",
+      "        }",
+      "    }",
+      "    return count;",
+      "}"
+    ]
+  },
+
+  "Activity Selection": {
+    "prefix": "gr_activity",
+    "body": [
+      "// Activity selection problem",
+      "int activitySelection(vector<pair<int,int>>& a) {",
+      "    // pair = {start, end}",
+      "    sort(a.begin(), a.end(), [](auto &x, auto &y) {",
+      "        return x.second < y.second;",
+      "    });",
+      "",
+      "    int count = 0;",
+      "    int last_end = -1;",
+      "",
+      "    for (auto &act : a) {",
+      "        if (act.first >= last_end) {",
+      "            count++;",
+      "            last_end = act.second;",
+      "        }",
+      "    }",
+      "    return count;",
+      "}"
+    ]
+  },
+
+  "Fractional Knapsack": {
+    "prefix": "gr_fractional_knapsack",
+    "body": [
+      "// Fractional Knapsack",
+      "struct Item {",
+      "    double value, weight;",
+      "};",
+      "",
+      "double fractionalKnapsack(vector<Item>& items, double W) {",
+      "    sort(items.begin(), items.end(), [](auto &a, auto &b) {",
+      "        return (a.value / a.weight) > (b.value / b.weight);",
+      "    });",
+      "",
+      "    double total = 0;",
+      "    for (auto &it : items) {",
+      "        if (W >= it.weight) {",
+      "            total += it.value;",
+      "            W -= it.weight;",
+      "        } else {",
+      "            total += it.value * (W / it.weight);",
+      "            break;",
+      "        }",
+      "    }",
+      "    return total;",
+      "}"
+    ]
+  },
+
+  "Minimum Number of Meeting Rooms": {
+    "prefix": "gr_min_rooms",
+    "body": [
+      "// Minimum meeting rooms required",
+      "int minMeetingRooms(vector<pair<int,int>>& intervals) {",
+      "    vector<int> start, end;",
+      "    for (auto &it : intervals) {",
+      "        start.push_back(it.first);",
+      "        end.push_back(it.second);",
+      "    }",
+      "",
+      "    sort(start.begin(), start.end());",
+      "    sort(end.begin(), end.end());",
+      "",
+      "    int i = 0, j = 0;",
+      "    int rooms = 0, max_rooms = 0;",
+      "",
+      "    while (i < start.size()) {",
+      "        if (start[i] < end[j]) {",
+      "            rooms++;",
+      "            max_rooms = max(max_rooms, rooms);",
+      "            i++;",
+      "        } else {",
+      "            rooms--;",
+      "            j++;",
+      "        }",
+      "    }",
+      "    return max_rooms;",
+      "}"
+    ]
+  },
+
+  "Job Scheduling with Deadlines (Max Profit)": {
+    "prefix": "gr_job_deadline",
+    "body": [
+      "// Job Scheduling with deadlines (Greedy + DSU or slots)",
+      "struct Job {",
+      "    int id, deadline, profit;",
+      "};",
+      "",
+      "int jobScheduling(vector<Job>& jobs) {",
+      "    sort(jobs.begin(), jobs.end(), [](auto &a, auto &b) {",
+      "        return a.profit > b.profit;",
+      "    });",
+      "",
+      "    int maxDeadline = 0;",
+      "    for (auto &j : jobs) maxDeadline = max(maxDeadline, j.deadline);",
+      "",
+      "    vector<bool> slot(maxDeadline + 1, false);",
+      "    int totalProfit = 0;",
+      "",
+      "    for (auto &job : jobs) {",
+      "        for (int d = job.deadline; d > 0; d--) {",
+      "            if (!slot[d]) {",
+      "                slot[d] = true;",
+      "                totalProfit += job.profit;",
+      "                break;",
+      "            }",
+      "        }",
+      "    }",
+      "    return totalProfit;",
+      "}"
+    ]
+  },
+
+  "Greedy Coin Change (Canonical)": {
+    "prefix": "gr_coin_change",
+    "body": [
+      "// Greedy coin change (works for canonical systems)",
+      "int coinChange(vector<int>& coins, int amount) {",
+      "    sort(coins.rbegin(), coins.rend());",
+      "    int count = 0;",
+      "",
+      "    for (int coin : coins) {",
+      "        count += amount / coin;",
+      "        amount %= coin;",
+      "    }",
+      "",
+      "    return (amount == 0 ? count : -1);",
+      "}"
+    ]
+  },
+
+  "Huffman Coding (Min Heap Pattern)": {
+    "prefix": "gr_huffman",
+    "body": [
+      "// Huffman coding pattern",
+      "long long huffmanCost(vector<int>& freq) {",
+      "    priority_queue<long long, vector<long long>, greater<long long>> pq;",
+      "    for (int f : freq) pq.push(f);",
+      "",
+      "    long long cost = 0;",
+      "    while (pq.size() > 1) {",
+      "        long long a = pq.top(); pq.pop();",
+      "        long long b = pq.top(); pq.pop();",
+      "        cost += a + b;",
+      "        pq.push(a + b);",
+      "    }",
+      "    return cost;",
+      "}"
+    ]
+  },
+
+  "Greedy Template (Sort + Iterate)": {
+    "prefix": "gr_template",
+    "body": [
+      "// Generic greedy template",
+      "sort(a.begin(), a.end(), cmp);",
+      "",
+      "for (auto &x : a) {",
+      "    if (can_take(x)) {",
+      "        take(x);",
+      "    }",
+      "}"
+    ]
+  }
+}
