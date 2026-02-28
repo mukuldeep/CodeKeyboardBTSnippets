@@ -1,0 +1,229 @@
+{
+  "Node Main Template": {
+    "prefix": "mainjs",
+    "body": [
+      "'use strict';",
+      "",
+      "function main() {",
+      "    $0",
+      "}",
+      "",
+      "if (require.main === module) {",
+      "    main();",
+      "}"
+    ],
+    "description": "Node.js main template"
+  },
+
+  "Fast Input (Node.js)": {
+    "prefix": "fastio",
+    "body": [
+      "const fs = require('fs');",
+      "const input = fs.readFileSync(0, 'utf-8').trim().split('\\n');",
+      "let idx = 0;",
+      "const next = () => input[idx++];"
+    ],
+    "description": "Fast input reading (competitive style)"
+  },
+
+  "Read Int Array": {
+    "prefix": "readarr",
+    "body": [
+      "const arr = next().split(' ').map(Number);"
+    ],
+    "description": "Read array of numbers"
+  },
+
+  "GCD Function": {
+    "prefix": "gcd",
+    "body": [
+      "function gcd(a, b) {",
+      "    return b === 0 ? a : gcd(b, a % b);",
+      "}"
+    ],
+    "description": "Compute GCD"
+  },
+
+  "LCM Function": {
+    "prefix": "lcm",
+    "body": [
+      "function lcm(a, b) {",
+      "    return (a / gcd(a, b)) * b;",
+      "}"
+    ],
+    "description": "Compute LCM"
+  },
+
+  "Binary Exponentiation": {
+    "prefix": "binexp",
+    "body": [
+      "function binPow(a, b) {",
+      "    let res = 1;",
+      "    while (b > 0) {",
+      "        if (b & 1) res *= a;",
+      "        a *= a;",
+      "        b >>= 1;",
+      "    }",
+      "    return res;",
+      "}"
+    ],
+    "description": "Binary exponentiation"
+  },
+
+  "Modular Exponentiation": {
+    "prefix": "modexp",
+    "body": [
+      "function modPow(a, b, mod) {",
+      "    let res = 1;",
+      "    a %= mod;",
+      "    while (b > 0) {",
+      "        if (b & 1) res = (res * a) % mod;",
+      "        a = (a * a) % mod;",
+      "        b >>= 1;",
+      "    }",
+      "    return res;",
+      "}"
+    ],
+    "description": "Modular exponentiation"
+  },
+
+  "Sort Array Asc": {
+    "prefix": "sortasc",
+    "body": [
+      "${1:arr}.sort((a, b) => a - b);"
+    ],
+    "description": "Sort array ascending"
+  },
+
+  "Sort Array Desc": {
+    "prefix": "sortdesc",
+    "body": [
+      "${1:arr}.sort((a, b) => b - a);"
+    ],
+    "description": "Sort array descending"
+  },
+
+  "Unique Array": {
+    "prefix": "unique",
+    "body": [
+      "const uniqueArr = [...new Set(${1:arr})];"
+    ],
+    "description": "Remove duplicates from array"
+  },
+
+  "Map Template": {
+    "prefix": "map",
+    "body": [
+      "const map = new Map();"
+    ],
+    "description": "Create Map"
+  },
+
+  "Set Template": {
+    "prefix": "set",
+    "body": [
+      "const set = new Set();"
+    ],
+    "description": "Create Set"
+  },
+
+  "Priority Queue (Min Heap)": {
+    "prefix": "minheap",
+    "body": [
+      "class MinHeap {",
+      "    constructor() { this.heap = []; }",
+      "    push(val) {",
+      "        this.heap.push(val);",
+      "        this.heap.sort((a, b) => a - b);",
+      "    }",
+      "    pop() {",
+      "        return this.heap.shift();",
+      "    }",
+      "}"
+    ],
+    "description": "Simple min heap (basic implementation)"
+  },
+
+  "For Loop": {
+    "prefix": "fori",
+    "body": [
+      "for (let i = 0; i < ${1:n}; i++) {",
+      "    $0",
+      "}"
+    ],
+    "description": "Standard for loop"
+  },
+
+  "For Of Loop": {
+    "prefix": "forof",
+    "body": [
+      "for (const ${1:x} of ${2:array}) {",
+      "    $0",
+      "}"
+    ],
+    "description": "For-of loop"
+  },
+
+  "Async Function Template": {
+    "prefix": "asyncfn",
+    "body": [
+      "async function ${1:fetchData}() {",
+      "    try {",
+      "        const res = await fetch(${2:url});",
+      "        const data = await res.json();",
+      "        $0",
+      "    } catch (err) {",
+      "        console.error(err);",
+      "    }",
+      "}"
+    ],
+    "description": "Async/await template"
+  },
+
+  "Promise Template": {
+    "prefix": "promise",
+    "body": [
+      "const p = new Promise((resolve, reject) => {",
+      "    $0",
+      "});",
+      "",
+      "p.then(res => {",
+      "    console.log(res);",
+      "}).catch(err => {",
+      "    console.error(err);",
+      "});"
+    ],
+    "description": "Promise template"
+  },
+
+  "Debounce Function": {
+    "prefix": "debounce",
+    "body": [
+      "function debounce(fn, delay) {",
+      "    let timer;",
+      "    return function (...args) {",
+      "        clearTimeout(timer);",
+      "        timer = setTimeout(() => fn.apply(this, args), delay);",
+      "    };",
+      "}"
+    ],
+    "description": "Debounce utility"
+  },
+
+  "Throttle Function": {
+    "prefix": "throttle",
+    "body": [
+      "function throttle(fn, limit) {",
+      "    let inThrottle;",
+      "    return function (...args) {",
+      "        if (!inThrottle) {",
+      "            fn.apply(this, args);",
+      "            inThrottle = true;",
+      "            setTimeout(() => inThrottle = false, limit);",
+      "        }",
+      "    };",
+      "}"
+    ],
+    "description": "Throttle utility"
+  }
+}
