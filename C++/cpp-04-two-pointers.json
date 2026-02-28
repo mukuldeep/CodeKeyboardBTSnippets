@@ -1,0 +1,222 @@
+{
+  "Fixed Size Sliding Window (Sum)": {
+    "prefix": "two_pointers_fixed_sum",
+    "body": [
+      "// Fixed window of size k (sum)",
+      "long long maxSumK(vector<int>& a, int k) {",
+      "    int n = a.size();",
+      "    long long sum = 0;",
+      "    for (int i = 0; i < k; i++) sum += a[i];",
+      "    long long ans = sum;",
+      "",
+      "    for (int i = k; i < n; i++) {",
+      "        sum += a[i] - a[i - k];",
+      "        ans = max(ans, sum);",
+      "    }",
+      "    return ans;",
+      "}"
+    ]
+  },
+
+  "Fixed Window (Generic Template)": {
+    "prefix": "two_pointers_fixed_template",
+    "body": [
+      "// Generic fixed window template",
+      "for (int i = 0; i < k; i++) {",
+      "    // add a[i]",
+      "}",
+      "",
+      "for (int i = k; i < n; i++) {",
+      "    // remove a[i-k]",
+      "    // add a[i]",
+      "}"
+    ]
+  },
+
+  "Variable Sliding Window (Longest Valid)": {
+    "prefix": "two_pointers_variable_longest",
+    "body": [
+      "// Longest subarray satisfying condition",
+      "int l = 0;",
+      "long long sum = 0;",
+      "int ans = 0;",
+      "",
+      "for (int r = 0; r < n; r++) {",
+      "    sum += a[r];",
+      "",
+      "    while (sum > k) {",
+      "        sum -= a[l];",
+      "        l++;",
+      "    }",
+      "",
+      "    ans = max(ans, r - l + 1);",
+      "}"
+    ]
+  },
+
+  "Variable Sliding Window (Count Subarrays)": {
+    "prefix": "two_pointers_variable_count",
+    "body": [
+      "// Count subarrays with sum <= k",
+      "int l = 0;",
+      "long long sum = 0;",
+      "long long count = 0;",
+      "",
+      "for (int r = 0; r < n; r++) {",
+      "    sum += a[r];",
+      "",
+      "    while (sum > k) {",
+      "        sum -= a[l];",
+      "        l++;",
+      "    }",
+      "",
+      "    count += (r - l + 1);",
+      "}"
+    ]
+  },
+
+  "At Most K Distinct Elements": {
+    "prefix": "two_pointers_atmost_k",
+    "body": [
+      "// Longest subarray with at most K distinct elements",
+      "int l = 0;",
+      "unordered_map<int,int> freq;",
+      "int ans = 0;",
+      "",
+      "for (int r = 0; r < n; r++) {",
+      "    freq[a[r]]++;",
+      "",
+      "    while (freq.size() > k) {",
+      "        freq[a[l]]--;",
+      "        if (freq[a[l]] == 0) freq.erase(a[l]);",
+      "        l++;",
+      "    }",
+      "",
+      "    ans = max(ans, r - l + 1);",
+      "}"
+    ]
+  },
+
+  "Exactly K Distinct Elements": {
+    "prefix": "two_pointers_exactly_k",
+    "body": [
+      "// Exactly K distinct = atMost(K) - atMost(K-1)",
+      "long long atMostK(vector<int>& a, int k) {",
+      "    int l = 0;",
+      "    unordered_map<int,int> freq;",
+      "    long long count = 0;",
+      "",
+      "    for (int r = 0; r < a.size(); r++) {",
+      "        freq[a[r]]++;",
+      "",
+      "        while (freq.size() > k) {",
+      "            freq[a[l]]--;",
+      "            if (freq[a[l]] == 0) freq.erase(a[l]);",
+      "            l++;",
+      "        }",
+      "",
+      "        count += (r - l + 1);",
+      "    }",
+      "    return count;",
+      "}"
+    ]
+  },
+
+  "Longest Substring Without Repeating Characters": {
+    "prefix": "two_pointers_no_repeat",
+    "body": [
+      "// Longest substring without repeating characters",
+      "vector<int> last(256, -1);",
+      "int l = 0, ans = 0;",
+      "",
+      "for (int r = 0; r < s.size(); r++) {",
+      "    l = max(l, last[s[r]] + 1);",
+      "    last[s[r]] = r;",
+      "    ans = max(ans, r - l + 1);",
+      "}"
+    ]
+  },
+
+  "Minimum Length Subarray with Sum >= K": {
+    "prefix": "two_pointers_min_len_sum",
+    "body": [
+      "// Minimum length subarray with sum >= k",
+      "int l = 0;",
+      "long long sum = 0;",
+      "int ans = INT_MAX;",
+      "",
+      "for (int r = 0; r < n; r++) {",
+      "    sum += a[r];",
+      "",
+      "    while (sum >= k) {",
+      "        ans = min(ans, r - l + 1);",
+      "        sum -= a[l];",
+      "        l++;",
+      "    }",
+      "}",
+      "",
+      "if (ans == INT_MAX) ans = -1;"
+    ]
+  },
+
+  "Two Pointers on Sorted Array (Pair Sum)": {
+    "prefix": "two_pointers_pair_sum",
+    "body": [
+      "// Two pointers on sorted array to find pair with sum = target",
+      "int l = 0, r = n - 1;",
+      "",
+      "while (l < r) {",
+      "    long long sum = a[l] + a[r];",
+      "    if (sum == target) {",
+      "        // found",
+      "        break;",
+      "    } else if (sum < target) {",
+      "        l++;",
+      "    } else {",
+      "        r--;",
+      "    }",
+      "}"
+    ]
+  },
+
+  "Three Sum Pattern (Sorted)": {
+    "prefix": "two_pointers_three_sum",
+    "body": [
+      "// 3-Sum template (sorted array)",
+      "sort(a.begin(), a.end());",
+      "",
+      "for (int i = 0; i < n; i++) {",
+      "    int l = i + 1, r = n - 1;",
+      "    while (l < r) {",
+      "        long long sum = a[i] + a[l] + a[r];",
+      "        if (sum == target) {",
+      "            // process",
+      "            l++; r--;",
+      "        } else if (sum < target) {",
+      "            l++;",
+      "        } else {",
+      "            r--;",
+      "        }",
+      "    }",
+      "}"
+    ]
+  },
+
+  "Sliding Window with Frequency Array (Fast)": {
+    "prefix": "two_pointers_freq_array",
+    "body": [
+      "// Sliding window using frequency array (small domain values)",
+      "vector<int> freq(MAX_VAL, 0);",
+      "int l = 0;",
+      "",
+      "for (int r = 0; r < n; r++) {",
+      "    freq[a[r]]++;",
+      "",
+      "    while (/* invalid condition */) {",
+      "        freq[a[l]]--;",
+      "        l++;",
+      "    }",
+      "}"
+    ]
+  }
+}
