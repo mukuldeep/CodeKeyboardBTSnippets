@@ -1,0 +1,245 @@
+{
+  "Main Template": {
+    "prefix": "mainjava",
+    "body": [
+      "import java.io.*;",
+      "import java.util.*;",
+      "",
+      "public class ${1:Main} {",
+      "    public static void main(String[] args) throws Exception {",
+      "        FastScanner fs = new FastScanner(System.in);",
+      "        PrintWriter out = new PrintWriter(System.out);",
+      "",
+      "        $0",
+      "",
+      "        out.flush();",
+      "    }",
+      "}"
+    ],
+    "description": "Java main template with fast IO"
+  },
+
+  "Fast Scanner Class": {
+    "prefix": "fastscanner",
+    "body": [
+      "static class FastScanner {",
+      "    private final InputStream in;",
+      "    private final byte[] buffer = new byte[1 << 16];",
+      "    private int ptr = 0, len = 0;",
+      "",
+      "    FastScanner(InputStream is) { in = is; }",
+      "",
+      "    private int read() throws IOException {",
+      "        if (ptr >= len) {",
+      "            len = in.read(buffer);",
+      "            ptr = 0;",
+      "            if (len <= 0) return -1;",
+      "        }",
+      "        return buffer[ptr++];",
+      "    }",
+      "",
+      "    int nextInt() throws IOException {",
+      "        int c, s = 1, x = 0;",
+      "        while ((c = read()) <= ' ') if (c == -1) return -1;",
+      "        if (c == '-') { s = -1; c = read(); }",
+      "        while (c > ' ') {",
+      "            x = x * 10 + c - '0';",
+      "            c = read();",
+      "        }",
+      "        return x * s;",
+      "    }",
+      "",
+      "    long nextLong() throws IOException {",
+      "        int c, s = 1;",
+      "        long x = 0;",
+      "        while ((c = read()) <= ' ') if (c == -1) return -1;",
+      "        if (c == '-') { s = -1; c = read(); }",
+      "        while (c > ' ') {",
+      "            x = x * 10 + c - '0';",
+      "            c = read();",
+      "        }",
+      "        return x * s;",
+      "    }",
+      "",
+      "    String next() throws IOException {",
+      "        StringBuilder sb = new StringBuilder();",
+      "        int c;",
+      "        while ((c = read()) <= ' ') if (c == -1) return null;",
+      "        while (c > ' ') {",
+      "            sb.append((char)c);",
+      "            c = read();",
+      "        }",
+      "        return sb.toString();",
+      "    }",
+      "}"
+    ],
+    "description": "Fast input reader"
+  },
+
+  "GCD Function": {
+    "prefix": "gcd",
+    "body": [
+      "static long gcd(long a, long b) {",
+      "    return b == 0 ? a : gcd(b, a % b);",
+      "}"
+    ],
+    "description": "Compute GCD"
+  },
+
+  "LCM Function": {
+    "prefix": "lcm",
+    "body": [
+      "static long lcm(long a, long b) {",
+      "    return a / gcd(a, b) * b;",
+      "}"
+    ],
+    "description": "Compute LCM"
+  },
+
+  "Binary Exponentiation": {
+    "prefix": "binexp",
+    "body": [
+      "static long binPow(long a, long b) {",
+      "    long res = 1;",
+      "    while (b > 0) {",
+      "        if ((b & 1) == 1) res *= a;",
+      "        a *= a;",
+      "        b >>= 1;",
+      "    }",
+      "    return res;",
+      "}"
+    ],
+    "description": "Binary exponentiation"
+  },
+
+  "Modular Exponentiation": {
+    "prefix": "modexp",
+    "body": [
+      "static long modPow(long a, long b, long mod) {",
+      "    long res = 1;",
+      "    a %= mod;",
+      "    while (b > 0) {",
+      "        if ((b & 1) == 1) res = (res * a) % mod;",
+      "        a = (a * a) % mod;",
+      "        b >>= 1;",
+      "    }",
+      "    return res;",
+      "}"
+    ],
+    "description": "Modular exponentiation"
+  },
+
+  "Read Int Array": {
+    "prefix": "readarr",
+    "body": [
+      "int[] ${1:arr} = new int[${2:n}];",
+      "for (int i = 0; i < ${2:n}; i++) {",
+      "    ${1:arr}[i] = fs.nextInt();",
+      "}"
+    ],
+    "description": "Read int array"
+  },
+
+  "Sort Array": {
+    "prefix": "sortarr",
+    "body": [
+      "Arrays.sort(${1:arr});"
+    ],
+    "description": "Sort array"
+  },
+
+  "Sort List": {
+    "prefix": "sortlist",
+    "body": [
+      "Collections.sort(${1:list});"
+    ],
+    "description": "Sort list"
+  },
+
+  "Custom Comparator": {
+    "prefix": "comparator",
+    "body": [
+      "Collections.sort(${1:list}, (a, b) -> {",
+      "    return ${2:Integer.compare(a, b)};",
+      "});"
+    ],
+    "description": "Lambda comparator"
+  },
+
+  "HashMap Template": {
+    "prefix": "hashmap",
+    "body": [
+      "Map<${1:Integer}, ${2:Integer}> map = new HashMap<>();"
+    ],
+    "description": "HashMap declaration"
+  },
+
+  "HashSet Template": {
+    "prefix": "hashset",
+    "body": [
+      "Set<${1:Integer}> set = new HashSet<>();"
+    ],
+    "description": "HashSet declaration"
+  },
+
+  "Priority Queue Min Heap": {
+    "prefix": "pqmin",
+    "body": [
+      "PriorityQueue<${1:Integer}> pq = new PriorityQueue<>();"
+    ],
+    "description": "Min heap"
+  },
+
+  "Priority Queue Max Heap": {
+    "prefix": "pqmax",
+    "body": [
+      "PriorityQueue<${1:Integer}> pq = new PriorityQueue<>(Collections.reverseOrder());"
+    ],
+    "description": "Max heap"
+  },
+
+  "Pair Class": {
+    "prefix": "pairclass",
+    "body": [
+      "static class Pair {",
+      "    int first, second;",
+      "    Pair(int f, int s) {",
+      "        first = f;",
+      "        second = s;",
+      "    }",
+      "}"
+    ],
+    "description": "Simple pair class"
+  },
+
+  "For Loop": {
+    "prefix": "fori",
+    "body": [
+      "for (int i = 0; i < ${1:n}; i++) {",
+      "    $0",
+      "}"
+    ],
+    "description": "Standard for loop"
+  },
+
+  "Enhanced For Loop": {
+    "prefix": "forauto",
+    "body": [
+      "for (${1:int} ${2:x} : ${3:collection}) {",
+      "    $0",
+      "}"
+    ],
+    "description": "Enhanced for loop"
+  },
+
+  "Thread Creation": {
+    "prefix": "thread",
+    "body": [
+      "Thread t = new Thread(() -> {",
+      "    $0",
+      "});",
+      "t.start();"
+    ],
+    "description": "Create and start thread"
+  }
+}
