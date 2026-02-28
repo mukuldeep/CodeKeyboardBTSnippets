@@ -1,0 +1,204 @@
+{
+  "Custom Comparator (Lambda Sort)": {
+    "prefix": "sortcmp",
+    "body": [
+      "sort(${1:vec}.begin(), ${1:vec}.end(), [](const auto &a, const auto &b) {",
+      "    // return true if a should come before b",
+      "    return ${2:a.first} < ${3:b.first};",
+      "});"
+    ],
+    "description": "Custom comparator using lambda in sort"
+  },
+
+  "Custom Comparator (Struct for set/map)": {
+    "prefix": "cmpstruct",
+    "body": [
+      "struct Cmp {",
+      "    bool operator()(const ${1:type} &a, const ${1:type} &b) const {",
+      "        if (${2:a.first} == ${3:b.first})",
+      "            return ${4:a.second} < ${5:b.second};",
+      "        return ${2:a.first} < ${3:b.first};",
+      "    }",
+      "};",
+      "",
+      "set<${1:type}, Cmp> st;"
+    ],
+    "description": "Custom comparator struct for set/map"
+  },
+
+  "Set/Map Contains Trick (C++20)": {
+    "prefix": "contains",
+    "body": [
+      "if (${1:mp}.contains(${2:key})) {",
+      "    // exists",
+      "}"
+    ],
+    "description": "Check existence using contains() in C++20"
+  },
+
+  "Map Default Increment Trick": {
+    "prefix": "mapinc",
+    "body": [
+      "map<${1:int}, ${2:int}> mp;",
+      "mp[${3:key}]++;"
+    ],
+    "description": "Automatic initialization with map operator[]"
+  },
+
+  "Erase from Set While Iterating": {
+    "prefix": "seterase",
+    "body": [
+      "for (auto it = ${1:st}.begin(); it != ${1:st}.end(); ) {",
+      "    if (${2:condition})",
+      "        it = ${1:st}.erase(it);",
+      "    else",
+      "        ++it;",
+      "}"
+    ],
+    "description": "Safe erase while iterating set"
+  },
+
+  "Multiset Erase One Occurrence": {
+    "prefix": "mseraseone",
+    "body": [
+      "auto it = ${1:ms}.find(${2:value});",
+      "if (it != ${1:ms}.end())",
+      "    ${1:ms}.erase(it);"
+    ],
+    "description": "Erase single occurrence from multiset"
+  },
+
+  "Multiset Erase All Occurrences": {
+    "prefix": "mseraseall",
+    "body": [
+      "${1:ms}.erase(${2:value});"
+    ],
+    "description": "Erase all occurrences from multiset"
+  },
+
+  "Ordered Set (PBDS)": {
+    "prefix": "pbdsset",
+    "body": [
+      "#include <ext/pb_ds/assoc_container.hpp>",
+      "#include <ext/pb_ds/tree_policy.hpp>",
+      "using namespace __gnu_pbds;",
+      "",
+      "template<typename T>",
+      "using ordered_set = tree<",
+      "    T,",
+      "    null_type,",
+      "    less<T>,",
+      "    rb_tree_tag,",
+      "    tree_order_statistics_node_update>;",
+      "",
+      "// Usage:",
+      "// ordered_set<int> os;",
+      "// os.insert(x);",
+      "// os.order_of_key(x);",
+      "// *os.find_by_order(k);"
+    ],
+    "description": "Policy Based Data Structure - ordered set"
+  },
+
+  "Ordered Multiset (PBDS with duplicates)": {
+    "prefix": "pbdsmulti",
+    "body": [
+      "#include <ext/pb_ds/assoc_container.hpp>",
+      "#include <ext/pb_ds/tree_policy.hpp>",
+      "using namespace __gnu_pbds;",
+      "",
+      "template<typename T>",
+      "using ordered_multiset = tree<",
+      "    pair<T,int>,",
+      "    null_type,",
+      "    less<pair<T,int>>,",
+      "    rb_tree_tag,",
+      "    tree_order_statistics_node_update>;",
+      "",
+      "// Insert as {value, unique_id}"
+    ],
+    "description": "PBDS ordered multiset using pair trick"
+  },
+
+  "Lower Bound Pattern (Vector)": {
+    "prefix": "lowerb",
+    "body": [
+      "auto it = lower_bound(${1:vec}.begin(), ${1:vec}.end(), ${2:x});",
+      "if (it != ${1:vec}.end()) {",
+      "    int idx = it - ${1:vec}.begin();",
+      "}"
+    ],
+    "description": "Lower bound usage pattern"
+  },
+
+  "Upper Bound Pattern (Vector)": {
+    "prefix": "upperb",
+    "body": [
+      "auto it = upper_bound(${1:vec}.begin(), ${1:vec}.end(), ${2:x});",
+      "if (it != ${1:vec}.end()) {",
+      "    int idx = it - ${1:vec}.begin();",
+      "}"
+    ],
+    "description": "Upper bound usage pattern"
+  },
+
+  "Binary Search on Answer Pattern": {
+    "prefix": "bsanswer",
+    "body": [
+      "long long l = ${1:0}, r = ${2:1e18};",
+      "while (l < r) {",
+      "    long long mid = l + (r - l) / 2;",
+      "    if (${3:check(mid)})",
+      "        r = mid;",
+      "    else",
+      "        l = mid + 1;",
+      "}"
+    ],
+    "description": "Binary search on answer template"
+  },
+
+  "Sort Descending": {
+    "prefix": "sortdesc",
+    "body": [
+      "sort(${1:vec}.begin(), ${1:vec}.end(), greater<>());"
+    ],
+    "description": "Sort container in descending order"
+  },
+
+  "Sort by Second Element (Pair)": {
+    "prefix": "sortsecond",
+    "body": [
+      "sort(${1:vec}.begin(), ${1:vec}.end(), [](const auto &a, const auto &b) {",
+      "    return a.second < b.second;",
+      "});"
+    ],
+    "description": "Sort vector of pairs by second element"
+  },
+
+  "Min Heap (Priority Queue)": {
+    "prefix": "minheap",
+    "body": [
+      "priority_queue<${1:int}, vector<${1:int}>, greater<${1:int}>> pq;"
+    ],
+    "description": "Min heap priority queue"
+  },
+
+  "Max Heap (Priority Queue)": {
+    "prefix": "maxheap",
+    "body": [
+      "priority_queue<${1:int}> pq;"
+    ],
+    "description": "Default max heap priority queue"
+  },
+
+  "Priority Queue with Custom Comparator": {
+    "prefix": "pqcmp",
+    "body": [
+      "auto cmp = [](const ${1:type} &a, const ${1:type} &b) {",
+      "    return ${2:a.first} > ${3:b.first};",
+      "};",
+      "priority_queue<${1:type}, vector<${1:type}>, decltype(cmp)> pq(cmp);"
+    ],
+    "description": "Priority queue with custom comparator"
+  }
+}
