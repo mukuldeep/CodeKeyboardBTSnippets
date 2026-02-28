@@ -1,0 +1,218 @@
+{
+  "GCC Builtins (popcount, clz, ctz)": {
+    "prefix": "bit_builtins",
+    "body": [
+      "// GCC Builtins",
+      "// __builtin_popcount(x)  -> number of set bits (int)",
+      "// __builtin_popcountll(x) -> number of set bits (long long)",
+      "// __builtin_clz(x)  -> leading zeros (undefined if x=0)",
+      "// __builtin_ctz(x)  -> trailing zeros (undefined if x=0)",
+      "// __builtin_parity(x) -> parity of bits",
+      "",
+      "int cnt = __builtin_popcount(x);",
+      "int cntll = __builtin_popcountll(x);",
+      "int lz = __builtin_clz(x);",
+      "int tz = __builtin_ctz(x);",
+      "int parity = __builtin_parity(x);"
+    ]
+  },
+
+  "Check Power of Two": {
+    "prefix": "bit_pow2",
+    "body": [
+      "// Check if x is power of 2",
+      "bool isPowerOfTwo(long long x) {",
+      "    return x > 0 && (x & (x - 1)) == 0;",
+      "}"
+    ]
+  },
+
+  "Turn Off Lowest Set Bit": {
+    "prefix": "bit_remove_lowest",
+    "body": [
+      "// Remove lowest set bit",
+      "x = x & (x - 1);"
+    ]
+  },
+
+  "Get Lowest Set Bit": {
+    "prefix": "bit_lowest",
+    "body": [
+      "// Get lowest set bit",
+      "long long lowest = x & (-x);"
+    ]
+  },
+
+  "Iterate All Submasks": {
+    "prefix": "bit_submask",
+    "body": [
+      "// Iterate over all submasks of mask",
+      "for (int sub = mask; sub; sub = (sub - 1) & mask) {",
+      "    // process sub",
+      "}",
+      "// If need to include 0:",
+      "// for (int sub = mask; ; sub = (sub - 1) & mask) {",
+      "//     if (sub == 0) break;",
+      "// }"
+    ]
+  },
+
+  "Iterate All Masks (0 to 2^n-1)": {
+    "prefix": "bit_all_masks",
+    "body": [
+      "for (int mask = 0; mask < (1 << n); mask++) {",
+      "    // process mask",
+      "}"
+    ]
+  },
+
+  "Count Bits DP (0 to N)": {
+    "prefix": "bit_count_dp",
+    "body": [
+      "// Count bits from 0 to n",
+      "vector<int> countBits(int n) {",
+      "    vector<int> dp(n + 1);",
+      "    for (int i = 1; i <= n; i++) {",
+      "        dp[i] = dp[i >> 1] + (i & 1);",
+      "    }",
+      "    return dp;",
+      "}"
+    ]
+  },
+
+  "XOR Swap": {
+    "prefix": "bit_xor_swap",
+    "body": [
+      "// XOR Swap (avoid if same variable)",
+      "a ^= b;",
+      "b ^= a;",
+      "a ^= b;"
+    ]
+  },
+
+  "Find Single Element (Others Twice)": {
+    "prefix": "bit_single_element",
+    "body": [
+      "// Every element appears twice except one",
+      "int singleNumber(vector<int>& nums) {",
+      "    int ans = 0;",
+      "    for (int x : nums) ans ^= x;",
+      "    return ans;",
+      "}"
+    ]
+  },
+
+  "Find Two Unique Elements": {
+    "prefix": "bit_two_unique",
+    "body": [
+      "// Two numbers appear once, others twice",
+      "pair<int,int> findTwo(vector<int>& nums) {",
+      "    int x = 0;",
+      "    for (int n : nums) x ^= n;",
+      "    int diff = x & (-x);",
+      "    int a = 0, b = 0;",
+      "    for (int n : nums) {",
+      "        if (n & diff) a ^= n;",
+      "        else b ^= n;",
+      "    }",
+      "    return {a, b};",
+      "}"
+    ]
+  },
+
+  "Gray Code Generation": {
+    "prefix": "bit_gray",
+    "body": [
+      "// Generate n-bit Gray code",
+      "vector<int> grayCode(int n) {",
+      "    vector<int> res;",
+      "    for (int i = 0; i < (1 << n); i++) {",
+      "        res.push_back(i ^ (i >> 1));",
+      "    }",
+      "    return res;",
+      "}"
+    ]
+  },
+
+  "Subset Sum via Bitmask": {
+    "prefix": "bit_subset_sum",
+    "body": [
+      "// Subset sum using bitmask",
+      "for (int mask = 0; mask < (1 << n); mask++) {",
+      "    long long sum = 0;",
+      "    for (int i = 0; i < n; i++) {",
+      "        if (mask & (1 << i)) sum += arr[i];",
+      "    }",
+      "}"
+    ]
+  },
+
+  "SOS DP (Sum Over Subsets)": {
+    "prefix": "bit_sos_dp",
+    "body": [
+      "// SOS DP",
+      "for (int i = 0; i < n; i++) {",
+      "    for (int mask = 0; mask < (1 << n); mask++) {",
+      "        if (mask & (1 << i)) {",
+      "            dp[mask] += dp[mask ^ (1 << i)];",
+      "        }",
+      "    }",
+      "}"
+    ]
+  },
+
+  "Bitset Optimization (Knapsack Style)": {
+    "prefix": "bit_bitset_knapsack",
+    "body": [
+      "// Bitset optimization (subset sum)",
+      "const int MAX = 100000;",
+      "bitset<MAX> bs;",
+      "bs[0] = 1;",
+      "for (int x : arr) {",
+      "    bs |= (bs << x);",
+      "}"
+    ]
+  },
+
+  "Enumerate Set Bits Efficiently": {
+    "prefix": "bit_enumerate_setbits",
+    "body": [
+      "// Enumerate set bits",
+      "for (int x = mask; x; x &= (x - 1)) {",
+      "    int bit = __builtin_ctz(x);",
+      "    // process bit",
+      "}"
+    ]
+  },
+
+  "Next Combination (Same Popcount)": {
+    "prefix": "bit_next_comb",
+    "body": [
+      "// Next mask with same popcount",
+      "int next_combination(int x) {",
+      "    int u = x & -x;",
+      "    int v = u + x;",
+      "    return v + (((v ^ x) / u) >> 2);",
+      "}"
+    ]
+  },
+
+  "Check Opposite Signs": {
+    "prefix": "bit_opposite_sign",
+    "body": [
+      "// Check if two integers have opposite signs",
+      "bool oppositeSigns(int a, int b) {",
+      "    return (a ^ b) < 0;",
+      "}"
+    ]
+  },
+
+  "Multiply by Power of Two": {
+    "prefix": "bit_mul_pow2",
+    "body": [
+      "// Multiply and divide by 2^k",
+      "x << k; // x * 2^k",
+      "x >> k; // x / 2^k (if x >= 0)"
+    ]
+  }
+}
