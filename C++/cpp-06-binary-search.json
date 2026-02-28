@@ -1,0 +1,166 @@
+{
+  "Classic Binary Search (Exact Match)": {
+    "prefix": "bs_classic",
+    "body": [
+      "// Binary search for exact target in sorted array",
+      "int l = 0, r = n - 1;",
+      "while (l <= r) {",
+      "    int mid = l + (r - l) / 2;",
+      "    if (a[mid] == target) {",
+      "        // found",
+      "        break;",
+      "    } else if (a[mid] < target) {",
+      "        l = mid + 1;",
+      "    } else {",
+      "        r = mid - 1;",
+      "    }",
+      "}"
+    ]
+  },
+
+  "First True Template": {
+    "prefix": "bs_first_true",
+    "body": [
+      "// First index where predicate(mid) == true",
+      "int l = 0, r = n - 1;",
+      "while (l < r) {",
+      "    int mid = l + (r - l) / 2;",
+      "    if (predicate(mid)) r = mid;",
+      "    else l = mid + 1;",
+      "}",
+      "// l is first true"
+    ]
+  },
+
+  "Last False Template": {
+    "prefix": "bs_last_false",
+    "body": [
+      "// Last index where predicate(mid) == false",
+      "int l = 0, r = n - 1;",
+      "while (l < r) {",
+      "    int mid = l + (r - l + 1) / 2;",
+      "    if (!predicate(mid)) l = mid;",
+      "    else r = mid - 1;",
+      "}",
+      "// l is last false"
+    ]
+  },
+
+  "Binary Search on Answer (Minimize)": {
+    "prefix": "bs_on_answer_min",
+    "body": [
+      "// Binary search on answer (minimum valid)",
+      "long long l = low, r = high;",
+      "while (l < r) {",
+      "    long long mid = l + (r - l) / 2;",
+      "    if (check(mid)) r = mid;",
+      "    else l = mid + 1;",
+      "}",
+      "// l is minimum valid answer"
+    ]
+  },
+
+  "Binary Search on Answer (Maximize)": {
+    "prefix": "bs_on_answer_max",
+    "body": [
+      "// Binary search on answer (maximum valid)",
+      "long long l = low, r = high;",
+      "while (l < r) {",
+      "    long long mid = l + (r - l + 1) / 2;",
+      "    if (check(mid)) l = mid;",
+      "    else r = mid - 1;",
+      "}",
+      "// l is maximum valid answer"
+    ]
+  },
+
+  "Lower Bound (Manual)": {
+    "prefix": "bs_lower_bound",
+    "body": [
+      "// First element >= target",
+      "int l = 0, r = n;",
+      "while (l < r) {",
+      "    int mid = l + (r - l) / 2;",
+      "    if (a[mid] < target) l = mid + 1;",
+      "    else r = mid;",
+      "}",
+      "// l is lower_bound"
+    ]
+  },
+
+  "Upper Bound (Manual)": {
+    "prefix": "bs_upper_bound",
+    "body": [
+      "// First element > target",
+      "int l = 0, r = n;",
+      "while (l < r) {",
+      "    int mid = l + (r - l) / 2;",
+      "    if (a[mid] <= target) l = mid + 1;",
+      "    else r = mid;",
+      "}",
+      "// l is upper_bound"
+    ]
+  },
+
+  "Floating Binary Search": {
+    "prefix": "bs_floating",
+    "body": [
+      "// Floating point binary search",
+      "double l = low, r = high;",
+      "for (int i = 0; i < 100; i++) { // 100 iterations precision",
+      "    double mid = (l + r) / 2.0;",
+      "    if (check(mid)) r = mid;",
+      "    else l = mid;",
+      "}",
+      "// l (or r) is approximate answer"
+    ]
+  },
+
+  "Binary Search with EPS": {
+    "prefix": "bs_eps",
+    "body": [
+      "// Floating binary search using EPS",
+      "double l = low, r = high;",
+      "const double EPS = 1e-9;",
+      "while (r - l > EPS) {",
+      "    double mid = (l + r) / 2.0;",
+      "    if (check(mid)) r = mid;",
+      "    else l = mid;",
+      "}"
+    ]
+  },
+
+  "Ternary Search (Discrete)": {
+    "prefix": "ts_discrete",
+    "body": [
+      "// Ternary search on unimodal function (discrete)",
+      "int l = 0, r = n - 1;",
+      "while (r - l > 3) {",
+      "    int m1 = l + (r - l) / 3;",
+      "    int m2 = r - (r - l) / 3;",
+      "    if (f(m1) < f(m2)) l = m1;",
+      "    else r = m2;",
+      "}",
+      "",
+      "// Final brute check",
+      "long long best = LLONG_MIN;",
+      "for (int i = l; i <= r; i++) {",
+      "    best = max(best, f(i));",
+      "}"
+    ]
+  },
+
+  "Ternary Search (Continuous)": {
+    "prefix": "ts_continuous",
+    "body": [
+      "// Ternary search on unimodal function (continuous)",
+      "double l = low, r = high;",
+      "for (int i = 0; i < 100; i++) {",
+      "    double m1 = l + (r - l) / 3.0;",
+      "    double m2 = r - (r - l) / 3.0;",
+      "    if (f(m1) < f(m2)) l = m1;",
+      "    else r = m2;",
+      "}"
+    ]
+  }
+}
