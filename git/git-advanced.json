@@ -1,0 +1,213 @@
+{
+  "Git Interactive Rebase": {
+    "prefix": "git-rebase-i",
+    "body": [
+      "git rebase -i ${1:HEAD~3}"
+    ],
+    "description": "Start interactive rebase"
+  },
+
+  "Git Rebase Onto": {
+    "prefix": "git-rebase-onto",
+    "body": [
+      "git rebase --onto ${1:new_base} ${2:old_base} ${3:branch}"
+    ],
+    "description": "Rebase a branch onto a new base"
+  },
+
+  "Git Continue Rebase": {
+    "prefix": "git-rebase-continue",
+    "body": [
+      "git rebase --continue"
+    ],
+    "description": "Continue rebase after resolving conflicts"
+  },
+
+  "Git Abort Rebase": {
+    "prefix": "git-rebase-abort",
+    "body": [
+      "git rebase --abort"
+    ],
+    "description": "Abort ongoing rebase"
+  },
+
+  "Git Worktree Add": {
+    "prefix": "git-worktree-add",
+    "body": [
+      "git worktree add ${1:../new-folder} ${2:branch_name}"
+    ],
+    "description": "Add new worktree for branch"
+  },
+
+  "Git Worktree List": {
+    "prefix": "git-worktree-list",
+    "body": [
+      "git worktree list"
+    ],
+    "description": "List all worktrees"
+  },
+
+  "Git Worktree Remove": {
+    "prefix": "git-worktree-remove",
+    "body": [
+      "git worktree remove ${1:../folder}"
+    ],
+    "description": "Remove a worktree"
+  },
+
+  "Git Submodule Add": {
+    "prefix": "git-submodule-add",
+    "body": [
+      "git submodule add ${1:repo_url} ${2:path}"
+    ],
+    "description": "Add a submodule"
+  },
+
+  "Git Submodule Init": {
+    "prefix": "git-submodule-init",
+    "body": [
+      "git submodule init"
+    ],
+    "description": "Initialize submodules"
+  },
+
+  "Git Submodule Update": {
+    "prefix": "git-submodule-update",
+    "body": [
+      "git submodule update --recursive --remote"
+    ],
+    "description": "Update submodules recursively"
+  },
+
+  "Git Reflog": {
+    "prefix": "git-reflog",
+    "body": [
+      "git reflog"
+    ],
+    "description": "Show reflog history"
+  },
+
+  "Git Recover Lost Commit": {
+    "prefix": "git-recover",
+    "body": [
+      "git checkout ${1:commit_hash}"
+    ],
+    "description": "Checkout lost commit (from reflog)"
+  },
+
+  "Git Bisect Start": {
+    "prefix": "git-bisect-start",
+    "body": [
+      "git bisect start"
+    ],
+    "description": "Start git bisect session"
+  },
+
+  "Git Bisect Good": {
+    "prefix": "git-bisect-good",
+    "body": [
+      "git bisect good ${1:commit}"
+    ],
+    "description": "Mark commit as good during bisect"
+  },
+
+  "Git Bisect Bad": {
+    "prefix": "git-bisect-bad",
+    "body": [
+      "git bisect bad ${1:commit}"
+    ],
+    "description": "Mark commit as bad during bisect"
+  },
+
+  "Git Bisect Reset": {
+    "prefix": "git-bisect-reset",
+    "body": [
+      "git bisect reset"
+    ],
+    "description": "End bisect session"
+  },
+
+  "Git Squash Last Commits": {
+    "prefix": "git-squash",
+    "body": [
+      "git reset --soft ${1:HEAD~2}",
+      "git commit -m \"${2:squashed commit message}\""
+    ],
+    "description": "Squash last N commits"
+  },
+
+  "Git Force Push": {
+    "prefix": "git-push-force",
+    "body": [
+      "git push --force-with-lease ${1:origin} ${2:branch}"
+    ],
+    "description": "Force push safely"
+  },
+
+  "Git Stash List": {
+    "prefix": "git-stash-list",
+    "body": [
+      "git stash list"
+    ],
+    "description": "List all stashes"
+  },
+
+  "Git Stash Apply Specific": {
+    "prefix": "git-stash-apply",
+    "body": [
+      "git stash apply ${1:stash@{0}}"
+    ],
+    "description": "Apply specific stash"
+  },
+
+  "Git Config Global": {
+    "prefix": "git-config-global",
+    "body": [
+      "git config --global ${1:user.name} \"${2:Your Name}\""
+    ],
+    "description": "Set global git config"
+  },
+
+  "Git Config List": {
+    "prefix": "git-config-list",
+    "body": [
+      "git config --list"
+    ],
+    "description": "List git configuration"
+  },
+
+  "Git Hooks Pre-Commit Template": {
+    "prefix": "git-hook-precommit",
+    "body": [
+      "#!/bin/sh",
+      "# Pre-commit hook",
+      "",
+      "echo \"Running pre-commit checks...\"",
+      "${1:make test}",
+      "",
+      "if [ $? -ne 0 ]; then",
+      "  echo \"Tests failed. Commit aborted.\"",
+      "  exit 1",
+      "fi",
+      "",
+      "exit 0"
+    ],
+    "description": "Pre-commit hook template"
+  },
+
+  "Git Create Patch": {
+    "prefix": "git-format-patch",
+    "body": [
+      "git format-patch ${1:HEAD~1}"
+    ],
+    "description": "Create patch from commits"
+  },
+
+  "Git Apply Patch": {
+    "prefix": "git-apply",
+    "body": [
+      "git apply ${1:file.patch}"
+    ],
+    "description": "Apply patch file"
+  }
+}
