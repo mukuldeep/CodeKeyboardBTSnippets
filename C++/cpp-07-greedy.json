@@ -23,7 +23,8 @@
       "    }",
       "    return count;",
       "}"
-    ]
+    ],
+    "description": ""
   },
 
   "Activity Selection": {
@@ -47,7 +48,8 @@
       "    }",
       "    return count;",
       "}"
-    ]
+    ],
+    "description": ""
   },
 
   "Fractional Knapsack": {
@@ -75,7 +77,8 @@
       "    }",
       "    return total;",
       "}"
-    ]
+    ],
+    "description": ""
   },
 
   "Minimum Number of Meeting Rooms": {
@@ -107,7 +110,8 @@
       "    }",
       "    return max_rooms;",
       "}"
-    ]
+    ],
+    "description": ""
   },
 
   "Job Scheduling with Deadlines (Max Profit)": {
@@ -140,7 +144,8 @@
       "    }",
       "    return totalProfit;",
       "}"
-    ]
+    ],
+    "description": ""
   },
 
   "Greedy Coin Change (Canonical)": {
@@ -158,7 +163,8 @@
       "",
       "    return (amount == 0 ? count : -1);",
       "}"
-    ]
+    ],
+    "description": ""
   },
 
   "Huffman Coding (Min Heap Pattern)": {
@@ -178,7 +184,8 @@
       "    }",
       "    return cost;",
       "}"
-    ]
+    ],
+    "description": ""
   },
 
   "Greedy Template (Sort + Iterate)": {
@@ -192,6 +199,7 @@
       "        take(x);",
       "    }",
       "}"
-    ]
+    ],
+    "description": ""
   }
 }

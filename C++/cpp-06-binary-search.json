@@ -15,7 +15,8 @@
       "        r = mid - 1;",
       "    }",
       "}"
-    ]
+    ],
+    "description": ""
   },
 
   "First True Template": {
@@ -29,7 +30,8 @@
       "    else l = mid + 1;",
       "}",
       "// l is first true"
-    ]
+    ],
+    "description": ""
   },
 
   "Last False Template": {
@@ -43,7 +45,8 @@
       "    else r = mid - 1;",
       "}",
       "// l is last false"
-    ]
+    ],
+    "description": ""
   },
 
   "Binary Search on Answer (Minimize)": {
@@ -57,7 +60,8 @@
       "    else l = mid + 1;",
       "}",
       "// l is minimum valid answer"
-    ]
+    ],
+    "description": ""
   },
 
   "Binary Search on Answer (Maximize)": {
@@ -71,7 +75,8 @@
       "    else r = mid - 1;",
       "}",
       "// l is maximum valid answer"
-    ]
+    ],
+    "description": ""
   },
 
   "Lower Bound (Manual)": {
@@ -85,7 +90,8 @@
       "    else r = mid;",
       "}",
       "// l is lower_bound"
-    ]
+    ],
+    "description": ""
   },
 
   "Upper Bound (Manual)": {
@@ -99,7 +105,8 @@
       "    else r = mid;",
       "}",
       "// l is upper_bound"
-    ]
+    ],
+    "description": ""
   },
 
   "Floating Binary Search": {
@@ -113,7 +120,8 @@
       "    else l = mid;",
       "}",
       "// l (or r) is approximate answer"
-    ]
+    ],
+    "description": ""
   },
 
   "Binary Search with EPS": {
@@ -127,7 +135,8 @@
       "    if (check(mid)) r = mid;",
       "    else l = mid;",
       "}"
-    ]
+    ],
+    "description": ""
   },
 
   "Ternary Search (Discrete)": {
@@ -147,7 +156,8 @@
       "for (int i = l; i <= r; i++) {",
       "    best = max(best, f(i));",
       "}"
-    ]
+    ],
+    "description": ""
   },
 
   "Ternary Search (Continuous)": {
@@ -161,6 +171,7 @@
       "    if (f(m1) < f(m2)) l = m1;",
       "    else r = m2;",
       "}"
-    ]
+    ],
+    "description": ""
   }
 }

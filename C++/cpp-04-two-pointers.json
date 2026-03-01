@@ -15,7 +15,8 @@
       "    }",
       "    return ans;",
       "}"
-    ]
+    ],
+    "description": ""
   },
 
   "Fixed Window (Generic Template)": {
@@ -30,7 +31,8 @@
       "    // remove a[i-k]",
       "    // add a[i]",
       "}"
-    ]
+    ],
+    "description": ""
   },
 
   "Variable Sliding Window (Longest Valid)": {
@@ -51,7 +53,8 @@
       "",
       "    ans = max(ans, r - l + 1);",
       "}"
-    ]
+    ],
+    "description": ""
   },
 
   "Variable Sliding Window (Count Subarrays)": {
@@ -72,7 +75,8 @@
       "",
       "    count += (r - l + 1);",
       "}"
-    ]
+    ],
+    "description": ""
   },
 
   "At Most K Distinct Elements": {
@@ -94,7 +98,8 @@
       "",
       "    ans = max(ans, r - l + 1);",
       "}"
-    ]
+    ],
+    "description": ""
   },
 
   "Exactly K Distinct Elements": {
@@ -119,7 +124,8 @@
       "    }",
       "    return count;",
       "}"
-    ]
+    ],
+    "description": ""
   },
 
   "Longest Substring Without Repeating Characters": {
@@ -134,7 +140,8 @@
       "    last[s[r]] = r;",
       "    ans = max(ans, r - l + 1);",
       "}"
-    ]
+    ],
+    "description": ""
   },
 
   "Minimum Length Subarray with Sum >= K": {
@@ -156,7 +163,8 @@
       "}",
       "",
       "if (ans == INT_MAX) ans = -1;"
-    ]
+    ],
+    "description": ""
   },
 
   "Two Pointers on Sorted Array (Pair Sum)": {
@@ -176,7 +184,8 @@
       "        r--;",
       "    }",
       "}"
-    ]
+    ],
+    "description": ""
   },
 
   "Three Sum Pattern (Sorted)": {
@@ -199,7 +208,8 @@
       "        }",
       "    }",
       "}"
-    ]
+    ],
+    "description": ""
   },
 
   "Sliding Window with Frequency Array (Fast)": {
@@ -217,6 +227,7 @@
       "        l++;",
       "    }",
       "}"
-    ]
+    ],
+    "description": ""
   }
 }

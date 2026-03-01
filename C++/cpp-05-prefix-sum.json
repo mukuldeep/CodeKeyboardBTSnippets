@@ -7,7 +7,8 @@
       "for (int i = 0; i < n; i++) {",
       "    pref[i + 1] = pref[i] + a[i];",
       "}"
-    ]
+    ],
+    "description": ""
   },
 
   "1D Range Sum Query [l, r]": {
@@ -17,7 +18,8 @@
       "long long rangeSum(int l, int r) {",
       "    return pref[r + 1] - pref[l];",
       "}"
-    ]
+    ],
+    "description": ""
   },
 
   "1D Prefix In-place": {
@@ -27,7 +29,8 @@
       "for (int i = 1; i < n; i++) {",
       "    a[i] += a[i - 1];",
       "}"
-    ]
+    ],
+    "description": ""
   },
 
   "2D Prefix Sum Build": {
@@ -44,7 +47,8 @@
       "                    - pref[i - 1][j - 1];",
       "    }",
       "}"
-    ]
+    ],
+    "description": ""
   },
 
   "2D Range Sum Query": {
@@ -58,7 +62,8 @@
       "         - pref[x2][y1 - 1]",
       "         + pref[x1 - 1][y1 - 1];",
       "}"
-    ]
+    ],
+    "description": ""
   },
 
   "1D Difference Array Build": {
@@ -66,7 +71,8 @@
     "body": [
       "// Build difference array",
       "vector<long long> diff(n + 1, 0);"
-    ]
+    ],
+    "description": ""
   },
 
   "1D Range Update (l, r, val)": {
@@ -75,7 +81,8 @@
       "// Add val to range [l, r]",
       "diff[l] += val;",
       "if (r + 1 < n) diff[r + 1] -= val;"
-    ]
+    ],
+    "description": ""
   },
 
   "Restore Array from Difference": {
@@ -87,7 +94,8 @@
       "for (int i = 1; i < n; i++) {",
       "    a[i] = a[i - 1] + diff[i];",
       "}"
-    ]
+    ],
+    "description": ""
   },
 
   "Difference Array Full Template": {
@@ -106,7 +114,8 @@
       "for (int i = 1; i < n; i++) {",
       "    a[i] = a[i - 1] + diff[i];",
       "}"
-    ]
+    ],
+    "description": ""
   },
 
   "2D Difference Array (Imos Method)": {
@@ -129,7 +138,8 @@
       "        if (i > 0 && j > 0) diff[i][j] -= diff[i - 1][j - 1];",
       "    }",
       "}"
-    ]
+    ],
+    "description": ""
   },
 
   "Imos Method (Event Sweep Style)": {
@@ -146,6 +156,7 @@
       "for (int i = 1; i <= n; i++) {",
       "    imos[i] += imos[i - 1];",
       "}"
-    ]
+    ],
+    "description": ""
   }
 }
