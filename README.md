@@ -1,5 +1,5 @@
 # CodeKeyboardBTSnippets
-This repository serves as a centralized Snippet Store for the app. It contains structured JSON files that define reusable code snippets which can be imported directly into the application.
+This repository serves as a centralized Snippet Store for the app. It contains structured JSON files that define reusable code snippets which can be imported directly into the app [Coder's keyboard](https://play.google.com/store/apps/details?id=com.offlinew.btkeyboardcode).
 
 Each snippet file follows a standardized format, allowing the app to validate, store, and trigger snippets efficiently. The purpose of this repository is to provide a clean, organized collection of ready-to-use code templates that improve typing speed, reduce repetition, and enhance developer productivity—especially when coding wsing the app from mobile devices.
 
@@ -50,7 +50,7 @@ The root of the JSON file must be a single JSON object. Each key inside the root
 
 ### File Naming Recommendation
 
-File name is considered as default group name while importing in the Code Keyboard BT App. Recommended file name format is `language-name-snippets-category.json` for example `java-basic-algorithms.json`, `cpp-search-algo.json`.
+File name is considered as default group name while importing in the [Code Keyboard BT](https://play.google.com/store/apps/details?id=com.offlinew.btkeyboardcode) App. Recommended file name format is `language-name-snippets-category.json` for example `java-basic-algorithms.json`, `cpp-search-algo.json`.
 
 # Contributing
 
